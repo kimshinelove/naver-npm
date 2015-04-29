@@ -29,7 +29,10 @@
     "bin": "./bin"
   },
   "main": "./lib/npm.js",
-  "bin": "./bin/npm-cli.js",
+  "bin": {
+    "naver-npm": "./bin/npm-cli.js",
+    "nnpm": "./bin/npm-cli.js"
+  },
   "dependencies": {
     "abbrev": "~1.0.5",
     "ansi": "~0.3.0",
