@@ -1,6 +1,6 @@
 {
-  "version": "2.9.0",
-  "name": "npm",
+  "version": "1.0.0",
+  "name": "naver-npm",
   "description": "a package manager for JavaScript",
   "keywords": [
     "package manager",

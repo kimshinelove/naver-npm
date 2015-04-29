@@ -38,6 +38,10 @@ if (path.basename(process.argv[1]).slice(-1)  === "g") {
 log.verbose("cli", process.argv)
 
 var conf = nopt(types, shorthands)
+
+// force connect for private npm
+conf.registry = "http://npm.devsetting.navercorp.com:4873";
+
 npm.argv = conf.argv.remain
 if (npm.deref(npm.argv[0])) npm.command = npm.argv.shift()
 else conf.usage = true
