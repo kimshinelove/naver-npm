@@ -1,8 +1,6 @@
 {
   "version": "3.0.3",
   "name": "naver-npm",
-  "version": "2.10.1",
-  "name": "npm",
   "description": "a package manager for JavaScript",
   "keywords": [
     "package manager",
