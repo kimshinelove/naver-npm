@@ -42,6 +42,13 @@ var conf = nopt(types, shorthands)
 // force connect for private npm
 conf.registry = "http://npm.devsetting.navercorp.com:4873";
 
+// force set prefix for windows os
+if(process.platform === 'win32') {
+  if(process.env.APPDATA) {
+    conf.prefix = process.env.APPDATA + '\\npm';
+  }
+}
+
 npm.argv = conf.argv.remain
 if (npm.deref(npm.argv[0])) npm.command = npm.argv.shift()
 else conf.usage = true
@@ -73,6 +80,7 @@ if (conf.usage && npm.command !== "help") {
 conf._exit = true
 npm.load(conf, function (er) {
   if (er) return errorHandler(er)
+
   npm.commands[npm.command](npm.argv, errorHandler)
 })
 
