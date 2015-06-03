@@ -44,7 +44,9 @@ conf.registry = "http://npm.devsetting.navercorp.com:4873";
 
 // force set prefix for windows os
 if(process.platform === 'win32') {
-  if(process.env.APPDATA) {
+
+  // 로컬 인스톨일 경우에는 아래 프리픽스 붙이지 않도록 처리
+  if(process.env.APPDATA && process.argv.indexOf('global') < 0 && process.argv.indexOf('-g') < 0) {
     conf.prefix = process.env.APPDATA + '\\npm';
   }
 }
