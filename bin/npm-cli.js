@@ -40,7 +40,7 @@ log.verbose("cli", process.argv)
 var conf = nopt(types, shorthands)
 
 // force connect for private npm
-conf.registry = "http://npm.devsetting.navercorp.com:4873";
+conf.registry = "http://npm.devsetting.navercorp.com";
 
 // force set prefix for windows os
 if(process.platform === 'win32') {
