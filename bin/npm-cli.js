@@ -39,8 +39,11 @@ log.verbose("cli", process.argv)
 
 var conf = nopt(types, shorthands)
 
-// force connect for private npm
-conf.registry = "http://npm.devsetting.navercorp.com";
+// 강제로 사내 NPM 서버 바로보도록 수정
+conf.registry = "https://npm.navercorp.com/";
+
+// with SSL UNABLE_TO_VERIFY_LEAF_SIGNATURE 오류 해결 - 추천하는 방법은 아님.
+conf['strict-ssl'] = false;
 
 // force set prefix for windows os
 if(process.platform === 'win32') {
