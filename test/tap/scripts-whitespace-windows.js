@@ -35,6 +35,8 @@ var dependency = {
   bin: [ 'bin/foo' ]
 }
 
+var extend = Object.assign || require('util')._extend
+
 var foo = function () {/*
 #!/usr/bin/env node
 
@@ -63,16 +65,15 @@ test('setup', function (t) {
 
   common.npm(['i', dep], {
     cwd: pkg,
-    env: {
+    env: extend({
       npm_config_cache: cache,
       npm_config_tmp: tmp,
       npm_config_prefix: pkg,
       npm_config_global: 'false'
-    }
+    }, process.env)
   }, function (err, code, stdout, stderr) {
     t.ifErr(err, 'npm i ' + dep + ' finished without error')
     t.equal(code, 0, 'npm i ' + dep + ' exited ok')
-    console.log('stderr', stderr)
     t.notOk(stderr, 'no output stderr')
     t.end()
   })
@@ -81,8 +82,7 @@ test('setup', function (t) {
 test('test', function (t) {
   common.npm(['run', 'foo'], EXEC_OPTS, function (err, code, stdout, stderr) {
     stderr = stderr.trim()
-    if (stderr)
-      console.error(stderr)
+    if (stderr) console.error(stderr)
     t.ifErr(err, 'npm run finished without error')
     t.equal(code, 0, 'npm run exited ok')
     t.notOk(stderr, 'no output stderr: ' + stderr)
@@ -101,4 +101,3 @@ function cleanup () {
   process.chdir(osenv.tmpdir())
   rimraf.sync(pkg)
 }
-
